@@ -75,12 +75,38 @@ function validateForm()
     var fname=$('input[name=firstName]').val();
     var lname=$('input[name=lastName]').val();
     var email= $('input[name=email]').val();
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var isEmailValid = regex.test(email);
   if ((fname==null || fname== "") && (lname==null || lname=="") && (email==null || email==""))
   {
     $('#firstname-group').addClass('has-error'); // add the error class to show red input
      $('#firstname-group').append('<div class="help-block" style="color:red;">' + 'First name is required' + '</div>'); // add the actual error message under our input
      $('#lastname-group').addClass('has-error'); // add the error class to show red input
      $('#lastname-group').append('<div class="help-block" style="color:red;">' + 'Last name is required' + '</div>'); // add the actual error message under our input
+     $('#email-group').addClass('has-error'); // add the error class to show red input
+     $('#email-group').append('<div class="help-block" style="color:red;">' + 'Email is required' + '</div>'); // add the actual error message under our input
+     return false;
+  }
+  else if ((fname==null || fname== "") && (lname==null || lname==""))
+  {
+    $('#firstname-group').addClass('has-error'); // add the error class to show red input
+     $('#firstname-group').append('<div class="help-block" style="color:red;">' + 'First name is required' + '</div>'); // add the actual error message under our input
+     $('#lastname-group').addClass('has-error'); // add the error class to show red input
+     $('#lastname-group').append('<div class="help-block" style="color:red;">' + 'Last name is required' + '</div>'); // add the actual error message under our input
+     return false;
+  }
+  else if( (lname==null || lname=="") && (email==null || email==""))
+  {
+  
+     $('#lastname-group').append('<div class="help-block" style="color:red;">' + 'Last name is required' + '</div>'); // add the actual error message under our input
+     $('#email-group').addClass('has-error'); // add the error class to show red input
+     $('#email-group').append('<div class="help-block" style="color:red;">' + 'Email is required' + '</div>'); // add the actual error message under our input
+     return false;
+  }
+  else if ((fname==null || fname== "") && (email==null || email=="")){
+    $('#firstname-group').addClass('has-error'); // add the error class to show red input
+     $('#firstname-group').append('<div class="help-block" style="color:red;">' + 'First name is required' + '</div>'); // add the actual error message under our input
+   
      $('#email-group').addClass('has-error'); // add the error class to show red input
      $('#email-group').append('<div class="help-block" style="color:red;">' + 'Email is required' + '</div>'); // add the actual error message under our input
      return false;
@@ -104,7 +130,17 @@ function validateForm()
     {
         $('#email-group').addClass('has-error'); // add the error class to show red input
      $('#email-group').append('<div class="help-block" style="color:red;">' + 'Email is required' + '</div>'); // add the actual error message under our input
+   
      return false;
+    }
+    else if(!isEmailValid)
+    {
+   
+   
+        $('#email-group').addClass('has-error'); // add the error class to show red input
+     $('#email-group').append('<div class="help-block" style="color:red;">' + 'Email is not valid' + '</div>'); // add the actual error message under our input
+     return false;  
+    
     }
 
     else{
